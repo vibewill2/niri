@@ -269,6 +269,7 @@ layout {
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "noctalia"
+spawn-at-startup "/usr/libexec/polkit-mate-authentication-agent-1"
 window-rule {
   // Rounded corners for a modern look.
   geometry-corner-radius 20
@@ -295,6 +296,11 @@ window-rule {
 debug {
   // Allows notification actions and window activation from Noctalia.
   honor-xdg-activation-with-invalid-serial
+}
+
+// Disable all background blur, including wallpaper blur requested by shell windows.
+blur {
+    off
 }
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
@@ -371,6 +377,12 @@ window-rule {
 /-window-rule {
     geometry-corner-radius 12
     clip-to-geometry true
+}
+
+// Make inactive windows slightly transparent. Adjust opacity (0.0-1.0) as desired.
+window-rule {
+    match is-active=false
+    opacity 0.90
 }
 
 binds {
